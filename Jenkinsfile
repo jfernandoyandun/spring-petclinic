@@ -1,7 +1,7 @@
 #!groovy
 
 pipeline {
-  agent none
+  agent any
   stages {
     stage('Maven Install') {
       steps {
@@ -9,7 +9,6 @@ pipeline {
       }
     }
     stage('Docker Build') {
-      agent any
       steps {
         sh 'docker build -t grupo02/spring-petclinic:latest .'
       }
