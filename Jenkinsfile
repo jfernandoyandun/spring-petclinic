@@ -4,7 +4,7 @@ pipeline {
   agent any
 
   stages {
-    stage('Setup Maven') {
+    stage('Maven Install') {
       steps {
         sh '''
           if [ ! -d "apache-maven-3.8.6" ]; then
@@ -13,14 +13,8 @@ pipeline {
             tar -xzf apache-maven-3.8.6-bin.tar.gz
             rm apache-maven-3.8.6-bin.tar.gz
           fi
-          ./apache-maven-3.8.6/bin/mvn --version
+          ./apache-maven-3.8.6/bin/mvn clean install -Dcheckstyle.skip=true
         '''
-      }
-    }
-
-    stage('Maven Install') {
-      steps {
-        sh './apache-maven-3.8.6/bin/mvn clean install -Dcheckstyle.skip=true'
       }
     }
 
